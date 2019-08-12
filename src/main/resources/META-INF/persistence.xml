@@ -7,6 +7,8 @@
     <persistence-unit name="javafx-db" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>ph.petrologisticscorp.finalsalary.model.Person</class>
+        <class>ph.petrologisticscorp.finalsalary.domain.employee.EmployeeModel</class>
+        <class>ph.petrologisticscorp.finalsalary.domain.company.CompanyModel</class>
 
         <properties>
             <property name="hibernate.current_session_context_class" value="thread"/>

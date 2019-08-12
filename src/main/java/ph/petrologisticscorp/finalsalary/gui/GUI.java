@@ -13,6 +13,7 @@ import javafx.stage.WindowEvent;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.function.Supplier;
 
 public class GUI extends Application {
@@ -21,25 +22,16 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        guiceContext = new GuiceContext(this, new Supplier<Collection<Module>>() {
-            @Override
-            public Collection<Module> get() {
-                return Arrays.asList(new GUIConfig());
-            }
-        });
+        guiceContext = new GuiceContext(this, () -> Collections.singletonList(new GUIConfig()));
         guiceContext.init();
         final WindowManager stageController = guiceContext.getInstance(WindowManager.class);
         stageController.switchScene(WindowManager.SCENES.PERSON_LIST_SCENE);
 
         Parent r = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
         primaryStage.setScene(new Scene(r, 200, 200));
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                System.out.println("JUREL");
-                Platform.exit();
-                System.exit(0);
-            }
+        primaryStage.setOnCloseRequest(event -> {
+            Platform.exit();
+            System.exit(0);
         });
         primaryStage.show();
     }

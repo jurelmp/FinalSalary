@@ -19,7 +19,8 @@ public class Person implements GUIRepresentable {
         this.name.set(s);
     }
 
-    public Person() {}
+    public Person() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,17 +32,21 @@ public class Person implements GUIRepresentable {
     public void setId(Integer id) {
         this.id.set(id);
     }
+
     public IntegerProperty idProperty() {
         return id;
     }
+
     @Basic
     @Column(name = "name")
     public String getName() {
         return name.get();
     }
+
     public void setName(String name) {
         this.name.set(name);
     }
+
     public StringProperty nameProperty() {
         return name;
     }
