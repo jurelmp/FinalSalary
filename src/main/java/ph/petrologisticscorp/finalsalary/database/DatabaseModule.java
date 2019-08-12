@@ -21,7 +21,7 @@ public class DatabaseModule extends AbstractModule {
     private JpaPersistModule createJpaPersistModule() {
         Properties props = new Properties();
 
-        props.put("javax.persistence.jdbc.url","jdbc:log4jdbc:h2:file:./database/sample;DB_CLOSE_DELAY=-1");
+        props.put("javax.persistence.jdbc.url","jdbc:log4jdbc:h2:file:./data/plc;DB_CLOSE_DELAY=-1");
         JpaPersistModule jpaModule = new JpaPersistModule("javafx-db");
         jpaModule.properties(props);
         return jpaModule;
