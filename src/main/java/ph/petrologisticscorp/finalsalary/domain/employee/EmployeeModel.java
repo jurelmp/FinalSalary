@@ -10,7 +10,7 @@ import ph.petrologisticscorp.finalsalary.gui.GUIRepresentable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class EmployeeModel implements GUIRepresentable {
 
     private final IntegerProperty id = new SimpleIntegerProperty(this, "id");

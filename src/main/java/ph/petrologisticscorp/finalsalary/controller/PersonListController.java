@@ -7,8 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import ph.petrologisticscorp.finalsalary.database.PersonService;
-import ph.petrologisticscorp.finalsalary.domain.company.CompanyModel;
-import ph.petrologisticscorp.finalsalary.domain.company.CompanyService;
 import ph.petrologisticscorp.finalsalary.gui.WindowManager;
 import ph.petrologisticscorp.finalsalary.gui.modeladapter.ListViewModelAdapter;
 import ph.petrologisticscorp.finalsalary.model.Person;
@@ -25,9 +23,6 @@ public class PersonListController {
 
     @Inject
     private PersonService personService;
-
-    @Inject
-    private CompanyService companyService;
 
     @Inject
     WindowManager windowManager;
@@ -60,7 +55,6 @@ public class PersonListController {
 
     public void random(ActionEvent event) {
         personObservableList.add(personService.createRandom());
-        companyService.save(new CompanyModel("Petrologistics Corp."));
     }
 
     public Person getPersonSelected() {
