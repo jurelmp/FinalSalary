@@ -1,28 +1,26 @@
 package ph.petrologisticscorp.finalsalary.domain.employee;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import ph.petrologisticscorp.finalsalary.domain.area.AreaModel;
 import ph.petrologisticscorp.finalsalary.domain.company.CompanyModel;
 import ph.petrologisticscorp.finalsalary.gui.GUIRepresentable;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "employees")
 public class EmployeeModel implements GUIRepresentable {
 
     private final IntegerProperty id = new SimpleIntegerProperty(this, "id");
-    private final StringProperty firstName = new SimpleStringProperty(this, "firstName");
+    private final StringProperty code = new SimpleStringProperty(this, "code");
     private final StringProperty lastName = new SimpleStringProperty(this, "lastName");
-    private CompanyModel company;
-
-    public EmployeeModel(String firstName, String lastName, CompanyModel company) {
-        this.firstName.set(firstName);
-        this.lastName.set(lastName);
-        this.company = company;
-    }
+    private final StringProperty firstName = new SimpleStringProperty(this, "firstName");
+    private final StringProperty middleName = new SimpleStringProperty(this, "middleName");
+    private final ObjectProperty<CompanyModel> company = new SimpleObjectProperty<>(this, "company");
+    private final ObjectProperty<AreaModel> area = new SimpleObjectProperty<>(this, "area");
+    private final ObjectProperty<Date> hireDate = new SimpleObjectProperty<>(this, "hireDate");
+    private final BooleanProperty active = new SimpleBooleanProperty(this, "isActive");
 
     public EmployeeModel() {
     }
@@ -43,7 +41,21 @@ public class EmployeeModel implements GUIRepresentable {
     }
 
     @Basic
-    @Column(name = "first_name")
+    @Column(name = "code", length = 10, unique = true)
+    public String getCode() {
+        return code.get();
+    }
+
+    public StringProperty codeProperty() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code.set(code);
+    }
+
+    @Basic
+    @Column(name = "first_name", nullable = false)
     public String getFirstName() {
         return firstName.get();
     }
@@ -57,7 +69,7 @@ public class EmployeeModel implements GUIRepresentable {
     }
 
     @Basic
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     public String getLastName() {
         return lastName.get();
     }
@@ -70,14 +82,73 @@ public class EmployeeModel implements GUIRepresentable {
         this.lastName.set(lastName);
     }
 
+    @Basic
+    @Column(name = "middle_name")
+    public String getMiddleName() {
+        return middleName.get();
+    }
+
+    public StringProperty middleNameProperty() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName.set(middleName);
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id", nullable = false)
     public CompanyModel getCompany() {
+        return company.get();
+    }
+
+    public ObjectProperty<CompanyModel> companyProperty() {
         return company;
     }
 
     public void setCompany(CompanyModel company) {
-        this.company = company;
+        this.company.set(company);
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "area_id", nullable = false)
+    public AreaModel getArea() {
+        return area.get();
+    }
+
+    public ObjectProperty<AreaModel> areaProperty() {
+        return area;
+    }
+
+    public void setArea(AreaModel area) {
+        this.area.set(area);
+    }
+
+    @Column(name = "hire_date")
+    @Temporal(TemporalType.DATE)
+    public Date getHireDate() {
+        return hireDate.get();
+    }
+
+    public ObjectProperty<Date> hireDateProperty() {
+        return hireDate;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate.set(hireDate);
+    }
+
+    @Column(name = "is_active", nullable = false, columnDefinition = "INT(1) DEFAULT 1")
+    public boolean isActive() {
+        return active.get();
+    }
+
+    public BooleanProperty activeProperty() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active.set(active);
     }
 
     @Override
@@ -90,9 +161,14 @@ public class EmployeeModel implements GUIRepresentable {
     public String toString() {
         return "EmployeeModel{" +
                 "id=" + id +
-                ", firstName=" + firstName +
+                ", code=" + code +
                 ", lastName=" + lastName +
+                ", firstName=" + firstName +
+                ", middleName=" + middleName +
                 ", company=" + company +
+                ", area=" + area +
+                ", hireDate=" + hireDate +
+                ", active=" + active +
                 '}';
     }
 }

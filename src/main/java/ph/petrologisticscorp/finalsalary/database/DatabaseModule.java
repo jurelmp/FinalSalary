@@ -6,6 +6,7 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import ph.petrologisticscorp.finalsalary.database.dao.GenericDAOImpl;
 import ph.petrologisticscorp.finalsalary.database.dao.IGenericDAO;
+import ph.petrologisticscorp.finalsalary.domain.area.AreaModel;
 import ph.petrologisticscorp.finalsalary.domain.company.CompanyModel;
 import ph.petrologisticscorp.finalsalary.domain.employee.EmployeeModel;
 import ph.petrologisticscorp.finalsalary.model.Person;
@@ -19,11 +20,14 @@ public class DatabaseModule extends AbstractModule {
         bind(new TypeLiteral<IGenericDAO<Person, Integer>>(){})
                 .to(new TypeLiteral<GenericDAOImpl<Person, Integer>>(){})
                 .in(Scopes.SINGLETON);
-        bind(new TypeLiteral<IGenericDAO<EmployeeModel, Integer>>(){})
-                .to(new TypeLiteral<GenericDAOImpl<EmployeeModel, Integer>>(){})
+        bind(new TypeLiteral<IGenericDAO<AreaModel, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<AreaModel, Integer>>(){})
                 .in(Scopes.SINGLETON);
         bind(new TypeLiteral<IGenericDAO<CompanyModel, Integer>>(){})
                 .to(new TypeLiteral<GenericDAOImpl<CompanyModel, Integer>>(){})
+                .in(Scopes.SINGLETON);
+        bind(new TypeLiteral<IGenericDAO<EmployeeModel, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<EmployeeModel, Integer>>(){})
                 .in(Scopes.SINGLETON);
         bind(JPAInitializer.class).asEagerSingleton();
     }

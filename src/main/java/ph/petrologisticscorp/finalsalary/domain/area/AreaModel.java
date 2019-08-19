@@ -1,4 +1,4 @@
-package ph.petrologisticscorp.finalsalary.domain.company;
+package ph.petrologisticscorp.finalsalary.domain.area;
 
 import javafx.beans.property.*;
 import ph.petrologisticscorp.finalsalary.domain.employee.EmployeeModel;
@@ -8,13 +8,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "companies")
-public class CompanyModel implements GUIRepresentable {
+@Table(name = "areas")
+public class AreaModel implements GUIRepresentable {
     private final IntegerProperty id = new SimpleIntegerProperty(this, "id");
     private final StringProperty name = new SimpleStringProperty(this, "name");
     private final ObjectProperty<Set<EmployeeModel>> employees = new SimpleObjectProperty<>(this, "employees");
 
-    public CompanyModel() {
+    public AreaModel() {
     }
 
     @Id
@@ -46,7 +46,7 @@ public class CompanyModel implements GUIRepresentable {
         this.name.set(name);
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
     public Set<EmployeeModel> getEmployees() {
         return employees.get();
     }
@@ -67,7 +67,7 @@ public class CompanyModel implements GUIRepresentable {
 
     @Override
     public String toString() {
-        return "CompanyModel{" +
+        return "AreaModel{" +
                 "id=" + id +
                 ", name=" + name +
                 ", employees=" + employees +
