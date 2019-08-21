@@ -9,6 +9,8 @@ import ph.petrologisticscorp.finalsalary.database.dao.IGenericDAO;
 import ph.petrologisticscorp.finalsalary.domain.area.AreaModel;
 import ph.petrologisticscorp.finalsalary.domain.company.CompanyModel;
 import ph.petrologisticscorp.finalsalary.domain.employee.EmployeeModel;
+import ph.petrologisticscorp.finalsalary.domain.leave.LeaveModel;
+import ph.petrologisticscorp.finalsalary.domain.salary.SalaryModel;
 import ph.petrologisticscorp.finalsalary.model.Person;
 
 import java.util.Properties;
@@ -28,6 +30,12 @@ public class DatabaseModule extends AbstractModule {
                 .in(Scopes.SINGLETON);
         bind(new TypeLiteral<IGenericDAO<EmployeeModel, Integer>>(){})
                 .to(new TypeLiteral<GenericDAOImpl<EmployeeModel, Integer>>(){})
+                .in(Scopes.SINGLETON);
+        bind(new TypeLiteral<IGenericDAO<LeaveModel, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<LeaveModel, Integer>>(){})
+                .in(Scopes.SINGLETON);
+        bind(new TypeLiteral<IGenericDAO<SalaryModel, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<SalaryModel, Integer>>(){})
                 .in(Scopes.SINGLETON);
         bind(JPAInitializer.class).asEagerSingleton();
     }

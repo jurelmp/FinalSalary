@@ -3,10 +3,13 @@ package ph.petrologisticscorp.finalsalary.domain.employee;
 import javafx.beans.property.*;
 import ph.petrologisticscorp.finalsalary.domain.area.AreaModel;
 import ph.petrologisticscorp.finalsalary.domain.company.CompanyModel;
+import ph.petrologisticscorp.finalsalary.domain.leave.LeaveModel;
+import ph.petrologisticscorp.finalsalary.domain.salary.SalaryModel;
 import ph.petrologisticscorp.finalsalary.gui.GUIRepresentable;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
@@ -21,6 +24,8 @@ public class EmployeeModel implements GUIRepresentable {
     private final ObjectProperty<AreaModel> area = new SimpleObjectProperty<>(this, "area");
     private final ObjectProperty<Date> hireDate = new SimpleObjectProperty<>(this, "hireDate");
     private final BooleanProperty active = new SimpleBooleanProperty(this, "isActive");
+    private final ObjectProperty<Set<LeaveModel>> leaves = new SimpleObjectProperty<>(this, "leaves");
+    private final ObjectProperty<Set<SalaryModel>> salaries = new SimpleObjectProperty<>(this, "salaries");
 
     public EmployeeModel() {
     }
@@ -151,6 +156,32 @@ public class EmployeeModel implements GUIRepresentable {
         this.active.set(active);
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    public Set<LeaveModel> getLeaves() {
+        return leaves.get();
+    }
+
+    public ObjectProperty<Set<LeaveModel>> leavesProperty() {
+        return leaves;
+    }
+
+    public void setLeaves(Set<LeaveModel> leaves) {
+        this.leaves.set(leaves);
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    public Set<SalaryModel> getSalaries() {
+        return salaries.get();
+    }
+
+    public ObjectProperty<Set<SalaryModel>> salariesProperty() {
+        return salaries;
+    }
+
+    public void setSalaries(Set<SalaryModel> salaries) {
+        this.salaries.set(salaries);
+    }
+
     @Override
     @Transient
     public String getTitle() {
@@ -169,6 +200,8 @@ public class EmployeeModel implements GUIRepresentable {
                 ", area=" + area +
                 ", hireDate=" + hireDate +
                 ", active=" + active +
+                ", leaves=" + leaves +
+                ", salaries=" + salaries +
                 '}';
     }
 }

@@ -27,7 +27,8 @@ public class GUI extends Application {
         final WindowManager stageController = guiceContext.getInstance(WindowManager.class);
         stageController.switchScene(WindowManager.SCENES.PERSON_LIST_SCENE);
 
-        Parent r = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
+//        Parent r = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
+        Parent r = FXMLLoader.load(getClass().getResource("/fxml/EmployeeTable.fxml"));
         primaryStage.setScene(new Scene(r, 200, 200));
         primaryStage.setOnCloseRequest(event -> {
             Platform.exit();
