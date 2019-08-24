@@ -108,5 +108,6 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 /FinalSalary.iml
-database
-data
+/database
+/data
+/logs
