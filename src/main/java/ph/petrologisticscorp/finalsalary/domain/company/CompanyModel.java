@@ -68,9 +68,9 @@ public class CompanyModel implements GUIRepresentable {
     @Override
     public String toString() {
         return "CompanyModel{" +
-                "id=" + id +
-                ", name=" + name +
-                ", employees=" + employees +
+                "id=" + id.getValue().toString() +
+                ", name=" + name.getValue() +
+                ", employees=" + employees.getValue().size() +
                 '}';
     }
 }

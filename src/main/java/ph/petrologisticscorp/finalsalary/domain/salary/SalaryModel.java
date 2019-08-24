@@ -126,13 +126,13 @@ public class SalaryModel implements GUIRepresentable {
     @Override
     public String toString() {
         return "SalaryModel{" +
-                "id=" + id +
-                ", employee=" + employee +
-                ", salary=" + salary +
-                ", sinking=" + sinking +
-                ", canteen=" + canteen +
-                ", durationFrom=" + durationFrom +
-                ", durationTo=" + durationTo +
+                "id=" + id.getValue().toString() +
+                ", employee=" + employee.getValue().getCode() +
+                ", salary=" + salary.getValue().toString() +
+                ", sinking=" + sinking.getValue().toString() +
+                ", canteen=" + canteen.getValue().toString() +
+                ", durationFrom=" + durationFrom.getValue().toString() +
+                ", durationTo=" + durationTo.getValue().toString() +
                 '}';
     }
 }

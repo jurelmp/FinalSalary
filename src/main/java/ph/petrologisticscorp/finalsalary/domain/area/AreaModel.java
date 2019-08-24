@@ -68,9 +68,9 @@ public class AreaModel implements GUIRepresentable {
     @Override
     public String toString() {
         return "AreaModel{" +
-                "id=" + id +
-                ", name=" + name +
-                ", employees=" + employees +
+                "id=" + id.getValue().toString() +
+                ", name=" + name.getValue() +
+                ", employees=" + employees.getValue().size() +
                 '}';
     }
 }

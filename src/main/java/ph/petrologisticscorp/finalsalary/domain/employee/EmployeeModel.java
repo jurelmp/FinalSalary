@@ -191,17 +191,17 @@ public class EmployeeModel implements GUIRepresentable {
     @Override
     public String toString() {
         return "EmployeeModel{" +
-                "id=" + id +
-                ", code=" + code +
-                ", lastName=" + lastName +
-                ", firstName=" + firstName +
-                ", middleName=" + middleName +
-                ", company=" + company +
-                ", area=" + area +
-                ", hireDate=" + hireDate +
-                ", active=" + active +
-                ", leaves=" + leaves +
-                ", salaries=" + salaries +
+                "id=" + id.getValue().toString() +
+                ", code=" + code.getValue() +
+                ", lastName=" + lastName.getValue() +
+                ", firstName=" + firstName.getValue() +
+                ", middleName=" + middleName.getValue() +
+                ", company=" + company.getValue().getName() +
+                ", area=" + area.getValue().getName() +
+                ", hireDate=" + hireDate.getValue().toString() +
+                ", active=" + active.getValue().toString() +
+                ", leaves=" + leaves.getValue().size() +
+                ", salaries=" + salaries.getValue().size() +
                 '}';
     }
 }

@@ -98,11 +98,11 @@ public class LeaveModel implements GUIRepresentable {
     @Override
     public String toString() {
         return "LeaveModel{" +
-                "id=" + id +
-                ", employee=" + employee +
-                ", year=" + year +
-                ", rate=" + rate +
-                ", days=" + days +
+                "id=" + id.getValue().toString() +
+                ", employee=" + employee.getValue().getCode() +
+                ", year=" + year.getValue().toString() +
+                ", rate=" + rate.getValue().toString() +
+                ", days=" + days.getValue().toString() +
                 '}';
     }
 }
