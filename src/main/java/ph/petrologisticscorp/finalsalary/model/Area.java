@@ -1,20 +1,18 @@
-package ph.petrologisticscorp.finalsalary.domain.area;
+package ph.petrologisticscorp.finalsalary.model;
 
 import javafx.beans.property.*;
-import ph.petrologisticscorp.finalsalary.domain.employee.EmployeeModel;
 import ph.petrologisticscorp.finalsalary.gui.GUIRepresentable;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "areas")
-public class AreaModel implements GUIRepresentable {
+public class Area implements GUIRepresentable {
     private final IntegerProperty id = new SimpleIntegerProperty(this, "id");
     private final StringProperty name = new SimpleStringProperty(this, "name");
-    private final ObjectProperty<Set<EmployeeModel>> employees = new SimpleObjectProperty<>(this, "employees");
+    private final ObjectProperty<Set<Employee>> employees = new SimpleObjectProperty<>(this, "employees");
 
-    public AreaModel() {
+    public Area() {
     }
 
     @Id
@@ -47,15 +45,15 @@ public class AreaModel implements GUIRepresentable {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
-    public Set<EmployeeModel> getEmployees() {
+    public Set<Employee> getEmployees() {
         return employees.get();
     }
 
-    public ObjectProperty<Set<EmployeeModel>> employeesProperty() {
+    public ObjectProperty<Set<Employee>> employeesProperty() {
         return employees;
     }
 
-    public void setEmployees(Set<EmployeeModel> employees) {
+    public void setEmployees(Set<Employee> employees) {
         this.employees.set(employees);
     }
 

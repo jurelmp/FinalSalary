@@ -1,33 +1,29 @@
-package ph.petrologisticscorp.finalsalary.domain.employee;
+package ph.petrologisticscorp.finalsalary.model;
 
 import javafx.beans.property.*;
-import ph.petrologisticscorp.finalsalary.domain.area.AreaModel;
-import ph.petrologisticscorp.finalsalary.domain.company.CompanyModel;
-import ph.petrologisticscorp.finalsalary.domain.leave.LeaveModel;
-import ph.petrologisticscorp.finalsalary.domain.salary.SalaryModel;
 import ph.petrologisticscorp.finalsalary.gui.GUIRepresentable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "employees")
-public class EmployeeModel implements GUIRepresentable {
+public class Employee implements GUIRepresentable, Serializable {
 
     private final IntegerProperty id = new SimpleIntegerProperty(this, "id");
     private final StringProperty code = new SimpleStringProperty(this, "code");
     private final StringProperty lastName = new SimpleStringProperty(this, "lastName");
     private final StringProperty firstName = new SimpleStringProperty(this, "firstName");
     private final StringProperty middleName = new SimpleStringProperty(this, "middleName");
-    private final ObjectProperty<CompanyModel> company = new SimpleObjectProperty<>(this, "company");
-    private final ObjectProperty<AreaModel> area = new SimpleObjectProperty<>(this, "area");
+    private final ObjectProperty<Company> company = new SimpleObjectProperty<>(this, "company");
+    private final ObjectProperty<Area> area = new SimpleObjectProperty<>(this, "area");
     private final ObjectProperty<Date> hireDate = new SimpleObjectProperty<>(this, "hireDate");
     private final BooleanProperty active = new SimpleBooleanProperty(this, "isActive");
-    private final ObjectProperty<Set<LeaveModel>> leaves = new SimpleObjectProperty<>(this, "leaves");
-    private final ObjectProperty<Set<SalaryModel>> salaries = new SimpleObjectProperty<>(this, "salaries");
+    private final ObjectProperty<Set<Leave>> leaves = new SimpleObjectProperty<>(this, "leaves");
+    private final ObjectProperty<Set<Salary>> salaries = new SimpleObjectProperty<>(this, "salaries");
 
-    public EmployeeModel() {
+    public Employee() {
     }
 
     @Id
@@ -45,7 +41,6 @@ public class EmployeeModel implements GUIRepresentable {
         this.id.set(id);
     }
 
-    @Basic
     @Column(name = "code", length = 10, unique = true)
     public String getCode() {
         return code.get();
@@ -103,29 +98,29 @@ public class EmployeeModel implements GUIRepresentable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id", nullable = false)
-    public CompanyModel getCompany() {
+    public Company getCompany() {
         return company.get();
     }
 
-    public ObjectProperty<CompanyModel> companyProperty() {
+    public ObjectProperty<Company> companyProperty() {
         return company;
     }
 
-    public void setCompany(CompanyModel company) {
+    public void setCompany(Company company) {
         this.company.set(company);
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id", nullable = false)
-    public AreaModel getArea() {
+    public Area getArea() {
         return area.get();
     }
 
-    public ObjectProperty<AreaModel> areaProperty() {
+    public ObjectProperty<Area> areaProperty() {
         return area;
     }
 
-    public void setArea(AreaModel area) {
+    public void setArea(Area area) {
         this.area.set(area);
     }
 
@@ -157,28 +152,28 @@ public class EmployeeModel implements GUIRepresentable {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    public Set<LeaveModel> getLeaves() {
+    public Set<Leave> getLeaves() {
         return leaves.get();
     }
 
-    public ObjectProperty<Set<LeaveModel>> leavesProperty() {
+    public ObjectProperty<Set<Leave>> leavesProperty() {
         return leaves;
     }
 
-    public void setLeaves(Set<LeaveModel> leaves) {
+    public void setLeaves(Set<Leave> leaves) {
         this.leaves.set(leaves);
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    public Set<SalaryModel> getSalaries() {
+    public Set<Salary> getSalaries() {
         return salaries.get();
     }
 
-    public ObjectProperty<Set<SalaryModel>> salariesProperty() {
+    public ObjectProperty<Set<Salary>> salariesProperty() {
         return salaries;
     }
 
-    public void setSalaries(Set<SalaryModel> salaries) {
+    public void setSalaries(Set<Salary> salaries) {
         this.salaries.set(salaries);
     }
 

@@ -15,7 +15,8 @@ public class WindowManager {
 
     public enum SCENES {
         PERSON_LIST_SCENE("/fxml/PersonList.fxml"),
-        PERSON_EDIT_SCENE("/fxml/PersonEdit.fxml");
+        PERSON_EDIT_SCENE("/fxml/PersonEdit.fxml"),
+        EMPLOYEE_LIST_SCENE("/fxml/EmployeeList.fxml");
 
         private String sceneName;
 

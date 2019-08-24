@@ -6,11 +6,11 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import ph.petrologisticscorp.finalsalary.database.dao.GenericDAOImpl;
 import ph.petrologisticscorp.finalsalary.database.dao.IGenericDAO;
-import ph.petrologisticscorp.finalsalary.domain.area.AreaModel;
-import ph.petrologisticscorp.finalsalary.domain.company.CompanyModel;
-import ph.petrologisticscorp.finalsalary.domain.employee.EmployeeModel;
-import ph.petrologisticscorp.finalsalary.domain.leave.LeaveModel;
-import ph.petrologisticscorp.finalsalary.domain.salary.SalaryModel;
+import ph.petrologisticscorp.finalsalary.model.Area;
+import ph.petrologisticscorp.finalsalary.model.Company;
+import ph.petrologisticscorp.finalsalary.model.Employee;
+import ph.petrologisticscorp.finalsalary.model.Leave;
+import ph.petrologisticscorp.finalsalary.model.Salary;
 import ph.petrologisticscorp.finalsalary.model.Person;
 
 import java.util.Properties;
@@ -22,20 +22,20 @@ public class DatabaseModule extends AbstractModule {
         bind(new TypeLiteral<IGenericDAO<Person, Integer>>(){})
                 .to(new TypeLiteral<GenericDAOImpl<Person, Integer>>(){})
                 .in(Scopes.SINGLETON);
-        bind(new TypeLiteral<IGenericDAO<AreaModel, Integer>>(){})
-                .to(new TypeLiteral<GenericDAOImpl<AreaModel, Integer>>(){})
+        bind(new TypeLiteral<IGenericDAO<Area, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<Area, Integer>>(){})
                 .in(Scopes.SINGLETON);
-        bind(new TypeLiteral<IGenericDAO<CompanyModel, Integer>>(){})
-                .to(new TypeLiteral<GenericDAOImpl<CompanyModel, Integer>>(){})
+        bind(new TypeLiteral<IGenericDAO<Company, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<Company, Integer>>(){})
                 .in(Scopes.SINGLETON);
-        bind(new TypeLiteral<IGenericDAO<EmployeeModel, Integer>>(){})
-                .to(new TypeLiteral<GenericDAOImpl<EmployeeModel, Integer>>(){})
+        bind(new TypeLiteral<IGenericDAO<Employee, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<Employee, Integer>>(){})
                 .in(Scopes.SINGLETON);
-        bind(new TypeLiteral<IGenericDAO<LeaveModel, Integer>>(){})
-                .to(new TypeLiteral<GenericDAOImpl<LeaveModel, Integer>>(){})
+        bind(new TypeLiteral<IGenericDAO<Leave, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<Leave, Integer>>(){})
                 .in(Scopes.SINGLETON);
-        bind(new TypeLiteral<IGenericDAO<SalaryModel, Integer>>(){})
-                .to(new TypeLiteral<GenericDAOImpl<SalaryModel, Integer>>(){})
+        bind(new TypeLiteral<IGenericDAO<Salary, Integer>>(){})
+                .to(new TypeLiteral<GenericDAOImpl<Salary, Integer>>(){})
                 .in(Scopes.SINGLETON);
         bind(JPAInitializer.class).asEagerSingleton();
     }

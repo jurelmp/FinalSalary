@@ -1,21 +1,19 @@
-package ph.petrologisticscorp.finalsalary.domain.leave;
+package ph.petrologisticscorp.finalsalary.model;
 
 import javafx.beans.property.*;
-import ph.petrologisticscorp.finalsalary.domain.employee.EmployeeModel;
 import ph.petrologisticscorp.finalsalary.gui.GUIRepresentable;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "leaves")
-public class LeaveModel implements GUIRepresentable {
+public class Leave implements GUIRepresentable {
     private final IntegerProperty id = new SimpleIntegerProperty(this, "id");
-    private final ObjectProperty<EmployeeModel> employee = new SimpleObjectProperty<>(this, "employee");
+    private final ObjectProperty<Employee> employee = new SimpleObjectProperty<>(this, "employee");
     private final IntegerProperty year = new SimpleIntegerProperty(this, "year");
     private final DoubleProperty rate = new SimpleDoubleProperty(this, "rate");
     private final DoubleProperty days = new SimpleDoubleProperty(this, "days");
 
-    public LeaveModel() {
+    public Leave() {
     }
 
     @Id
@@ -35,15 +33,15 @@ public class LeaveModel implements GUIRepresentable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_code", referencedColumnName = "code", columnDefinition = "VARCHAR(10)")
-    public EmployeeModel getEmployee() {
+    public Employee getEmployee() {
         return employee.get();
     }
 
-    public ObjectProperty<EmployeeModel> employeeProperty() {
+    public ObjectProperty<Employee> employeeProperty() {
         return employee;
     }
 
-    public void setEmployee(EmployeeModel employee) {
+    public void setEmployee(Employee employee) {
         this.employee.set(employee);
     }
 

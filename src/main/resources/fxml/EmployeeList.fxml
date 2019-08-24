@@ -8,32 +8,30 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0"
-            prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ph.petrologisticscorp.finalsalary.controller.EmployeeListController">
     <center>
-        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableViewEmployees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn prefWidth="75.0" text="Code"/>
-                <TableColumn prefWidth="100.0" text="Last Name"/>
-                <TableColumn prefWidth="100.0" text="First Name"/>
-                <TableColumn prefWidth="50.0" text="MI"/>
-                <TableColumn prefWidth="100.0" text="Company"/>
-                <TableColumn prefWidth="100.0" text="Area"/>
-                <TableColumn text="Hire Date"/>
-                <TableColumn prefWidth="75.0" text="Status"/>
+                <TableColumn fx:id="colCode" prefWidth="75.0" text="Code" />
+                <TableColumn fx:id="colLastName" prefWidth="100.0" text="Last Name" />
+                <TableColumn fx:id="colFirstName" prefWidth="100.0" text="First Name" />
+                <TableColumn fx:id="colMidInitial" prefWidth="50.0" text="MI" />
+                <TableColumn fx:id="colCompany" prefWidth="200.0" text="Company" />
+                <TableColumn fx:id="colArea" prefWidth="100.0" text="Area" />
+                <TableColumn fx:id="colHireDate" text="Hire Date" />
+                <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
             </columns>
         </TableView>
     </center>
     <top>
         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <buttons>
-                <TextField/>
-                <Button mnemonicParsing="false" text="Find"/>
+                <TextField />
+                <Button mnemonicParsing="false" text="Find" />
             </buttons>
         </ButtonBar>
     </top>
     <padding>
-        <Insets bottom="14.0" left="14.0" right="14.0"/>
+        <Insets bottom="14.0" left="14.0" right="14.0" />
     </padding>
 </BorderPane>
