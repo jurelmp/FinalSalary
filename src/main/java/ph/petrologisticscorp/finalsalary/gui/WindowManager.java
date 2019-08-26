@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.net.URL;
 
 public class WindowManager {
 
@@ -19,7 +18,8 @@ public class WindowManager {
         PERSON_LIST_SCENE("/fxml/PersonList.fxml"),
         PERSON_EDIT_SCENE("/fxml/PersonEdit.fxml"),
         EMPLOYEE_LIST_SCENE("/fxml/EmployeeList.fxml"),
-        EMPLOYEE_EDITOR_SCENE("/fxml/EmployeeEditor.fxml");
+        EMPLOYEE_EDITOR_SCENE("/fxml/EmployeeEditor.fxml"),
+        COMPANY_LIST_SCENE("/fxml/CompanyList.fxml");
 
         private String sceneName;
 

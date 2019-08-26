@@ -9,8 +9,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.controlsfx.control.table.TableFilter;
 import ph.petrologisticscorp.finalsalary.database.EmployeeService;
 import ph.petrologisticscorp.finalsalary.gui.WindowManager;
 import ph.petrologisticscorp.finalsalary.model.Employee;
@@ -70,6 +72,7 @@ public class EmployeeListController {
         colStatus.setCellValueFactory(param -> param.getValue().activeProperty());
         mEmployeeObservableList.addAll(employeeService.getAll());
         tableViewEmployees.setItems(mEmployeeObservableList);
+        TableFilter.forTableView(tableViewEmployees).lazy(true).apply();
     }
 
     private void setupListeners() {
@@ -90,8 +93,16 @@ public class EmployeeListController {
                             Platform.exit();
                             System.exit(0);
                         });
+                        ((Stage) newWindow).setMaximized(true);
                     }
                 });
+            }
+        });
+
+        tableViewEmployees.setOnKeyReleased((keyEvent) -> {
+            KeyCode keyCode = keyEvent.getCode();
+            if (keyCode == KeyCode.ENTER) {
+                mWindowManager.switchScene(WindowManager.SCENES.EMPLOYEE_EDITOR_SCENE);
             }
         });
     }

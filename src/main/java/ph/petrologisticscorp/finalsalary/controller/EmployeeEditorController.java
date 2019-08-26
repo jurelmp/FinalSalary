@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.controlsfx.control.table.TableFilter;
+import ph.petrologisticscorp.finalsalary.Helper;
 import ph.petrologisticscorp.finalsalary.database.AreaService;
 import ph.petrologisticscorp.finalsalary.database.CompanyService;
 import ph.petrologisticscorp.finalsalary.database.EmployeeService;
@@ -23,6 +25,9 @@ import java.util.Date;
 
 @Singleton
 public class EmployeeEditorController {
+
+    @FXML
+    private SplitPane employeeEditorPane;
 
     @Inject
     private EmployeeListController mEmployeeListController;
@@ -94,6 +99,11 @@ public class EmployeeEditorController {
             btnSalaryNew.setDisable(true);
         }
         setupBindings();
+        setupListeners();
+    }
+
+    private void setupListeners() {
+        Helper.disableResize(employeeEditorPane.sceneProperty());
     }
 
     private void setupBindings() {
@@ -144,6 +154,8 @@ public class EmployeeEditorController {
         txtHireDate.setValue(employeeSelected.getHireDate() != null ?
                 new java.sql.Date(employeeSelected.getHireDate().getTime()).toLocalDate() : null);
         txtStatus.setText(employeeSelected.isActive() ? "Active" : "Inactive");
+
+        TableFilter.forTableView(tableViewEmployeeSalaries).lazy(true).apply();
     }
 
     public void save(ActionEvent event) {

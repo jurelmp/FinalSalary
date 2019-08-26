@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane fx:id="companyListPane" fx:controller="ph.petrologisticscorp.finalsalary.controller.CompanyListController"
+            maxHeight="-Infinity"
+            maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="427.0"
+            xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <TableView fx:id="tableViewCompanies" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="colName" prefWidth="261.0" text="Name"/>
+                <TableColumn fx:id="colNoOfEmployees" minWidth="0.0" prefWidth="158.0" text="No. of Employees"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

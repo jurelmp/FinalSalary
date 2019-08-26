@@ -19,11 +19,11 @@ public class CompanyService {
         return companyDAO.getAll();
     }
 
-    public Company getById(Integer id) {
+    public Company find(Integer id) {
         return companyDAO.find(id);
     }
 
-    public Company save(Company company) {
+    public Company saveOrUpdate(Company company) {
         return companyDAO.saveOrUpdate(company);
     }
 }

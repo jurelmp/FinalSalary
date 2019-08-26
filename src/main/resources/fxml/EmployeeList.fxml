@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -32,10 +31,8 @@
               <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <items>
                       <Button fx:id="btnNew" mnemonicParsing="false" onAction="#newAction" prefHeight="25.0" prefWidth="75.0" text="New" />
-                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Records" />
+                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Companies" />
                       <Separator prefHeight="30.0" prefWidth="24.0" />
-                      <TextField />
-                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Find" />
                   </items>
               </ToolBar>
          </bottom>
@@ -44,14 +41,11 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#closeAction" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#closeAction" text="New Employee" />
+                        <MenuItem mnemonicParsing="false" onAction="#closeAction" text="Close" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
+                <Menu mnemonicParsing="false" text="Report" />
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#aboutAction" text="About" />
