@@ -1,6 +1,8 @@
 package ph.petrologisticscorp.finalsalary.model;
 
+import javafx.beans.Observable;
 import javafx.beans.property.*;
+import javafx.util.Callback;
 import ph.petrologisticscorp.finalsalary.gui.GUIRepresentable;
 
 import javax.persistence.*;
@@ -63,12 +65,12 @@ public class Area implements GUIRepresentable {
         return name.getValue();
     }
 
+    public static Callback<Area, Observable[]> extractor() {
+        return (Area area) -> new Observable[]{area.nameProperty()};
+    }
+
     @Override
     public String toString() {
-        return "AreaModel{" +
-                "id=" + id.getValue().toString() +
-                ", name=" + name.getValue() +
-                ", employees=" + employees.getValue().size() +
-                '}';
+        return name.getValue();
     }
 }

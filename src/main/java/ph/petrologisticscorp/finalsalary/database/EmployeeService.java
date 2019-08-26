@@ -18,8 +18,20 @@ public class EmployeeService {
         return employeeDAO.getAll();
     }
 
-    public Employee createEmployee(Employee employee) {
+    public Employee create(Employee employee) {
         employeeDAO.add(employee);
         return employee;
+    }
+
+    public Employee update(Employee employee) {
+        return employeeDAO.update(employee);
+    }
+
+    public Employee saveOrUpdate(Employee employee) {
+        return employeeDAO.saveOrUpdate(employee);
+    }
+
+    public Employee find(int id) {
+        return employeeDAO.find(id);
     }
 }

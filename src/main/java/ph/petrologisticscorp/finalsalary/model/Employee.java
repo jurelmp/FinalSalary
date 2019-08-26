@@ -6,6 +6,7 @@ import ph.petrologisticscorp.finalsalary.gui.GUIRepresentable;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -166,6 +167,9 @@ public class Employee implements GUIRepresentable, Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     public Set<Salary> getSalaries() {
+        if (salaries.get() == null) {
+            return new HashSet<>();
+        }
         return salaries.get();
     }
 
@@ -186,17 +190,14 @@ public class Employee implements GUIRepresentable, Serializable {
     @Override
     public String toString() {
         return "EmployeeModel{" +
-                "id=" + id.getValue().toString() +
+                "id=" + id.getValue() +
                 ", code=" + code.getValue() +
                 ", lastName=" + lastName.getValue() +
                 ", firstName=" + firstName.getValue() +
                 ", middleName=" + middleName.getValue() +
-                ", company=" + company.getValue().getName() +
                 ", area=" + area.getValue().getName() +
-                ", hireDate=" + hireDate.getValue().toString() +
-                ", active=" + active.getValue().toString() +
-                ", leaves=" + leaves.getValue().size() +
-                ", salaries=" + salaries.getValue().size() +
+                ", hireDate=" + hireDate.getValue() +
+                ", active=" + active.getValue() +
                 '}';
     }
 }

@@ -32,7 +32,7 @@ public class Leave implements GUIRepresentable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_code", referencedColumnName = "code", columnDefinition = "VARCHAR(10)")
+    @JoinColumn(name = "employee_id", nullable = false)
     public Employee getEmployee() {
         return employee.get();
     }
@@ -96,11 +96,10 @@ public class Leave implements GUIRepresentable {
     @Override
     public String toString() {
         return "LeaveModel{" +
-                "id=" + id.getValue().toString() +
-                ", employee=" + employee.getValue().getCode() +
-                ", year=" + year.getValue().toString() +
-                ", rate=" + rate.getValue().toString() +
-                ", days=" + days.getValue().toString() +
+                "id=" + id.getValue() +
+                ", year=" + year.getValue() +
+                ", rate=" + rate.getValue() +
+                ", days=" + days.getValue() +
                 '}';
     }
 }

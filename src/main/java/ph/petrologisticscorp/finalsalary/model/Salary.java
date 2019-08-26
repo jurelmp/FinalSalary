@@ -35,7 +35,7 @@ public class Salary implements GUIRepresentable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_code", referencedColumnName = "code", columnDefinition = "VARCHAR(10)")
+    @JoinColumn(name = "employee_id", nullable = false)
     public Employee getEmployee() {
         return employee.get();
     }
@@ -124,13 +124,12 @@ public class Salary implements GUIRepresentable {
     @Override
     public String toString() {
         return "SalaryModel{" +
-                "id=" + id.getValue().toString() +
-                ", employee=" + employee.getValue().getCode() +
-                ", salary=" + salary.getValue().toString() +
-                ", sinking=" + sinking.getValue().toString() +
-                ", canteen=" + canteen.getValue().toString() +
-                ", durationFrom=" + durationFrom.getValue().toString() +
-                ", durationTo=" + durationTo.getValue().toString() +
+                "id=" + id.getValue() +
+                ", salary=" + salary.getValue() +
+                ", sinking=" + sinking.getValue() +
+                ", canteen=" + canteen.getValue() +
+                ", durationFrom=" + durationFrom.getValue() +
+                ", durationTo=" + durationTo.getValue() +
                 '}';
     }
 }
