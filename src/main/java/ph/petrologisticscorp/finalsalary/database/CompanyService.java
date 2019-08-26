@@ -23,7 +23,11 @@ public class CompanyService {
         return companyDAO.find(id);
     }
 
-    public Company saveOrUpdate(Company company) {
-        return companyDAO.saveOrUpdate(company);
+    public Company update(Company company) {
+        return companyDAO.update(company);
+    }
+
+    public void create(Company company) {
+        companyDAO.add(company);
     }
 }

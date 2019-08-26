@@ -113,7 +113,6 @@ public class EmployeeListController {
 
     public void newAction(ActionEvent event) {
         tableViewEmployees.getSelectionModel().clearSelection();
-        System.out.println(tableViewEmployees.getSelectionModel().getSelectedItem());
         mWindowManager.switchScene(WindowManager.SCENES.EMPLOYEE_EDITOR_SCENE);
     }
 
@@ -135,5 +134,14 @@ public class EmployeeListController {
         Stage s = (Stage) alert.getDialogPane().getScene().getWindow();
         s.getIcons().add(new Image("/images/graph.png"));
         alert.showAndWait();
+    }
+
+    public void companiesAction(ActionEvent event) {
+        mWindowManager.switchScene(WindowManager.SCENES.COMPANY_LIST_SCENE);
+    }
+
+    public void menuItemNew(ActionEvent event) {
+        tableViewEmployees.getSelectionModel().clearSelection();
+        mWindowManager.switchScene(WindowManager.SCENES.EMPLOYEE_EDITOR_SCENE);
     }
 }
