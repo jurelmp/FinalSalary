@@ -5,8 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ph.petrologisticscorp.finalsalary.database.EmployeeService;
@@ -84,11 +86,6 @@ public class EmployeeListController {
                 newScene.windowProperty().addListener((observableWindow, oldWindow, newWindow) -> {
                     if (oldWindow == null && newWindow != null) {
                         // stage is set. now is the right time to do whatever we need to the stage in the controller.
-                        ((Stage) newWindow).maximizedProperty().addListener((a, b, c) -> {
-                            if (c) {
-                                System.out.println("I am maximized!");
-                            }
-                        });
                         newWindow.setOnCloseRequest(event -> {
                             Platform.exit();
                             System.exit(0);
@@ -117,5 +114,15 @@ public class EmployeeListController {
     public void closeAction(ActionEvent event) {
         Platform.exit();
         System.exit(0);
+    }
+
+    public void aboutAction(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Petrologistics Corporation");
+        alert.setHeaderText("Salary Ex");
+        alert.setContentText("App Version 1.0\nJavaFX 8\nH2 Database 1.4.197\nHibernate 5.4.4.Final");
+        Stage s = (Stage) alert.getDialogPane().getScene().getWindow();
+        s.getIcons().add(new Image("/images/graph.png"));
+        alert.showAndWait();
     }
 }

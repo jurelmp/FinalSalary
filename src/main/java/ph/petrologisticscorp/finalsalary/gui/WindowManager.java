@@ -48,7 +48,6 @@ public class WindowManager {
         }
         fxmlLoader.getController();
         Stage stage = new Stage();
-        URL imageUrl = getClass().getResource("/images/graph.png");
         stage.getIcons().add(new Image("/images/graph.png"));
         stage.setTitle("Petrologistics Corporation");
         stage.setScene(new Scene(root, 750, 550));
