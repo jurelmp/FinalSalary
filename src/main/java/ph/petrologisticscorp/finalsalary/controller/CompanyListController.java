@@ -1,5 +1,6 @@
 package ph.petrologisticscorp.finalsalary.controller;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.controlsfx.control.table.TableFilter;
 import ph.petrologisticscorp.finalsalary.database.CompanyService;
 import ph.petrologisticscorp.finalsalary.model.Company;
@@ -72,10 +74,14 @@ public class CompanyListController {
             }
         });
 
-        tableViewCompanies.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (event.getButton() == MouseButton.SECONDARY) {
-                contextMenu.show(tableViewCompanies, event.getScreenX(), event.getScreenY());
-            }
+        tableViewCompanies.setRowFactory(param -> {
+            final TableRow<Company> row = new TableRow<>();
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+            return row;
         });
 
         menuItemEdit.setOnAction(event -> showUpdateDialog());
