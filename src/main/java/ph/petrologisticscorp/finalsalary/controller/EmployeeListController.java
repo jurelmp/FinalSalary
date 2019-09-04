@@ -144,4 +144,8 @@ public class EmployeeListController {
         tableViewEmployees.getSelectionModel().clearSelection();
         mWindowManager.switchScene(WindowManager.SCENES.EMPLOYEE_EDITOR_SCENE);
     }
+
+    public void areasAction(ActionEvent event) {
+        mWindowManager.switchScene(WindowManager.SCENES.AREA_LIST_SCENE);
+    }
 }

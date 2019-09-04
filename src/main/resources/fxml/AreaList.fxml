@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="areaListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="360.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/8.0.211"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ph.petrologisticscorp.finalsalary.controller.AreaListController">
+    <center>
+        <TableView fx:id="tableViewAreas" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="colName" maxWidth="300.0" minWidth="150.0" prefWidth="200.0" text="Area"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

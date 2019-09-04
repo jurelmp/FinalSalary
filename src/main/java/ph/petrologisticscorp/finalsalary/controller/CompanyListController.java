@@ -8,10 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.controlsfx.control.table.TableFilter;
 import ph.petrologisticscorp.finalsalary.database.CompanyService;
 import ph.petrologisticscorp.finalsalary.model.Company;
@@ -91,8 +89,8 @@ public class CompanyListController {
     private void showUpdateDialog() {
         Company company = tableViewCompanies.getSelectionModel().getSelectedItem();
         TextInputDialog inputDialog = new TextInputDialog(company.getName());
-        inputDialog.setTitle("Update " + company.getName());
-        inputDialog.setContentText("Name");
+        inputDialog.setTitle(company.getName());
+        inputDialog.setContentText("Company");
         Stage s = (Stage) inputDialog.getDialogPane().getScene().getWindow();
         s.getIcons().add(new Image("/images/graph.png"));
 

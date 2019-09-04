@@ -17,4 +17,12 @@ public class AreaService {
     public List<Area> getAll() {
         return areaDAO.getAll();
     }
+
+    public Area update(Area area) {
+        return areaDAO.update(area);
+    }
+
+    public void create(Area area) {
+        areaDAO.add(area);
+    }
 }
