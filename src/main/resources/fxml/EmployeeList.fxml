@@ -41,6 +41,7 @@
                         <Button mnemonicParsing="false" onAction="#areasAction" prefHeight="25.0" prefWidth="100.0"
                                 text="Areas"/>
                         <Separator prefHeight="30.0" prefWidth="24.0"/>
+                        <Button mnemonicParsing="false" onAction="#test" text="Button"/>
                     </items>
                 </ToolBar>
             </bottom>
@@ -53,7 +54,7 @@
                                 <MenuItem mnemonicParsing="false" onAction="#closeAction" text="Close"/>
                             </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Report"/>
+                        <Menu mnemonicParsing="false" onAction="#test" text="Report"/>
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#aboutAction" text="About"/>
