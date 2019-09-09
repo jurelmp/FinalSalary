@@ -12,9 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.query.JRJpaQueryExecuterFactory;
 import org.controlsfx.control.table.TableFilter;
 import ph.petrologisticscorp.finalsalary.database.EmployeeService;
 import ph.petrologisticscorp.finalsalary.gui.WindowManager;
@@ -24,8 +21,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Singleton
 public class EmployeeListController {
@@ -157,10 +152,7 @@ public class EmployeeListController {
         mWindowManager.switchScene(WindowManager.SCENES.AREA_LIST_SCENE);
     }
 
-    public void test(ActionEvent actionEvent) throws JRException {
-        System.out.println("Test");
-        Map parameterMap = new HashMap<>();
-        parameterMap.put(JRJpaQueryExecuterFactory.PARAMETER_JPA_ENTITY_MANAGER, entityManager);
-        JasperFillManager.fillReportToFile("reports/Blank_A4.jasper", parameterMap);
+    public void reportsAction(ActionEvent event) {
+        mWindowManager.switchScene(WindowManager.SCENES.REPORT_SCENE);
     }
 }

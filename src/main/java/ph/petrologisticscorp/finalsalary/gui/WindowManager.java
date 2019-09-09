@@ -20,7 +20,8 @@ public class WindowManager {
         EMPLOYEE_LIST_SCENE("/fxml/EmployeeList.fxml"),
         EMPLOYEE_EDITOR_SCENE("/fxml/EmployeeEditor.fxml"),
         COMPANY_LIST_SCENE("/fxml/CompanyList.fxml"),
-        AREA_LIST_SCENE("/fxml/AreaList.fxml");
+        AREA_LIST_SCENE("/fxml/AreaList.fxml"),
+        REPORT_SCENE("/fxml/Report.fxml");
 
         private String sceneName;
 

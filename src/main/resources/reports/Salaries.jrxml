@@ -12,13 +12,16 @@
     <parameter name="DATE_FROM" class="java.util.Date"/>
     <parameter name="DATE_TO" class="java.util.Date"/>
     <parameter name="AREA" class="ph.petrologisticscorp.finalsalary.model.Area"/>
+    <parameter name="AREA_ID" class="java.lang.Integer"/>
     <parameter name="COMPANY" class="ph.petrologisticscorp.finalsalary.model.Company"/>
+    <parameter name="COMPANY_ID" class="java.lang.Integer"/>
+    <parameter name="DATE_NOW" class="java.util.Date"/>
     <queryString>
         <![CDATA[SELECT E.ID, CODE, LAST_NAME, FIRST_NAME, MIDDLE_NAME, SALARY, SINKING, CANTEEN, ROUND((SALARY - (CANTEEN+SINKING)), 2) NET_PAY
 FROM EMPLOYEE E
          JOIN SALARY S
               ON S.ID = (SELECT ID FROM SALARY SAL WHERE E.ID = SAL.EMPLOYEE_ID ORDER BY SAL.DURATION_FROM, SAL.DURATION_TO DESC LIMIT 1)
-WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BETWEEN $P{DATE_FROM} AND $P{DATE_TO}]]>
+WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND E.AREA_ID = $P{AREA_ID} AND E.COMPANY_ID = $P{COMPANY_ID}]]>
     </queryString>
     <field name="ID" class="java.lang.Integer">
         <property name="com.jaspersoft.studio.field.label" value="ID"/>
@@ -67,21 +70,18 @@ WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BE
     <variable name="NET_PAY_TOTAL" class="java.lang.Double" calculation="Sum">
         <variableExpression><![CDATA[$F{NET_PAY}]]></variableExpression>
     </variable>
-    <variable name="DATE_NOW" class="java.util.Date">
-        <variableExpression><![CDATA[NOW( )]]></variableExpression>
-    </variable>
     <background>
         <band splitType="Stretch"/>
     </background>
     <title>
         <band height="21" splitType="Stretch">
-            <staticText>
+            <textField>
                 <reportElement x="164" y="1" width="227" height="19" uuid="58b1b59b-7ac2-4c70-bcc4-0ba15ac2cb40"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="14" isBold="true"/>
+                    <font size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Static Text]]></text>
-            </staticText>
+                <textFieldExpression><![CDATA[$P{COMPANY}.getName()]]></textFieldExpression>
+            </textField>
         </band>
     </title>
     <pageHeader>
@@ -91,9 +91,9 @@ WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BE
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Center" verticalAlignment="Top">
-                    <font size="12"/>
+                    <font size="10"/>
                 </textElement>
-                <text><![CDATA[STATIC TEXT]]></text>
+                <text><![CDATA[SALARIES]]></text>
             </staticText>
             <staticText>
                 <reportElement x="272" y="21" width="10" height="20" uuid="4d867275-d27e-4765-a88b-08106a23c1ac">
@@ -101,25 +101,25 @@ WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BE
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Center">
-                    <font size="12"/>
+                    <font size="10"/>
                 </textElement>
                 <text><![CDATA[-]]></text>
             </staticText>
-            <staticText>
+            <textField>
                 <reportElement x="168" y="41" width="219" height="20" uuid="98a5cd01-4808-4f63-a5c3-f3f6943c2008">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Center">
-                    <font size="12"/>
+                    <font size="10"/>
                 </textElement>
-                <text><![CDATA[Text]]></text>
-            </staticText>
+                <textFieldExpression><![CDATA[$P{AREA}.getName()]]></textFieldExpression>
+            </textField>
             <textField pattern="MMM d, yyyy">
                 <reportElement x="170" y="21" width="100" height="20" uuid="ffbed627-75ca-40fc-ab35-ae0da135c0ba">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Right">
-                    <font size="12"/>
+                    <font size="10"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{DATE_FROM}]]></textFieldExpression>
             </textField>
@@ -128,7 +128,7 @@ WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BE
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Left">
-                    <font size="12"/>
+                    <font size="10"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{DATE_TO}]]></textFieldExpression>
             </textField>
@@ -147,7 +147,7 @@ WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BE
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Left">
-                    <font isBold="true"/>
+                    <font size="9" isBold="true"/>
                 </textElement>
                 <text><![CDATA[ID]]></text>
             </staticText>
@@ -159,7 +159,7 @@ WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BE
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement>
-                    <font isBold="true"/>
+                    <font size="9" isBold="true"/>
                 </textElement>
                 <text><![CDATA[NAME]]></text>
             </staticText>
@@ -171,7 +171,7 @@ WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BE
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Right">
-                    <font isBold="true"/>
+                    <font size="9" isBold="true"/>
                 </textElement>
                 <text><![CDATA[SALARY]]></text>
             </staticText>
@@ -183,7 +183,7 @@ WHERE S.DURATION_FROM BETWEEN $P{DATE_FROM} AND $P{DATE_TO} AND S.DURATION_TO BE
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Right">
-                    <font isBold="true"/>
+                    <font size="9" isBold="true"/>
                 </textElement>
                 <text><![CDATA[NET
 PAY]]></text>
@@ -196,7 +196,7 @@ PAY]]></text>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Right">
-                    <font isBold="true"/>
+                    <font size="9" isBold="true"/>
                 </textElement>
                 <text><![CDATA[SINKING
 FUND]]></text>
@@ -209,7 +209,7 @@ FUND]]></text>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Right">
-                    <font isBold="true"/>
+                    <font size="9" isBold="true"/>
                 </textElement>
                 <text><![CDATA[CANTEEN]]></text>
             </staticText>
@@ -355,7 +355,7 @@ FUND]]></text>
                 <reportElement x="27" y="129" width="100" height="15" uuid="423d6773-b432-46b7-9b7d-8e62f530317f">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[$V{DATE_NOW}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{DATE_NOW}]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="27" y="114" width="100" height="15" uuid="ca10a4f4-50e3-401e-9535-02bc7af9cb0a">

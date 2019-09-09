@@ -16,14 +16,6 @@ public class GUI extends Application {
         guiceContext.init();
         final WindowManager stageController = guiceContext.getInstance(WindowManager.class);
         stageController.switchScene(WindowManager.SCENES.EMPLOYEE_LIST_SCENE);
-
-//        Parent r = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-//        primaryStage.setScene(new Scene(r, 200, 200));
-//        primaryStage.setOnCloseRequest(event -> {
-//            Platform.exit();
-//            System.exit(0);
-//        });
-//        primaryStage.show();
     }
 
     public void run(String[] args) {

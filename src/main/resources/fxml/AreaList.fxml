@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane fx:id="areaListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="360.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/8.0.211"
+            prefHeight="370.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/8.0.211"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ph.petrologisticscorp.finalsalary.controller.AreaListController">
     <center>

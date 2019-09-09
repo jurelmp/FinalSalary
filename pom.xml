@@ -114,8 +114,15 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.9.0</version>
+            <version>6.5.1</version>
         </dependency>
+
+        <!--<dependency>
+            <groupId>net.sourceforge.dynamicreports</groupId>
+            <artifactId>dynamicreports-core</artifactId>
+            <version>5.1.0</version>
+        </dependency>-->
+
     </dependencies>
 
     <build>
