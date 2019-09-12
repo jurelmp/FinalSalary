@@ -238,6 +238,7 @@ public class EmployeeEditorController {
         result.ifPresent(salary -> {
             Salary s = mSalaryService.saveOrUpdate(salary);
             mSalaryObservableList.add(s);
+            employeeSelected.getSalaries().add(s);
             System.out.println(s);
         });
     }
