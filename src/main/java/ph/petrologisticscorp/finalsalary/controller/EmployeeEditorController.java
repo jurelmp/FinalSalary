@@ -14,15 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.table.TableFilter;
 import ph.petrologisticscorp.finalsalary.Helper;
-import ph.petrologisticscorp.finalsalary.database.AreaService;
-import ph.petrologisticscorp.finalsalary.database.CompanyService;
-import ph.petrologisticscorp.finalsalary.database.EmployeeService;
-import ph.petrologisticscorp.finalsalary.database.SalaryService;
+import ph.petrologisticscorp.finalsalary.database.*;
 import ph.petrologisticscorp.finalsalary.gui.modeladapter.ListViewModelAdapter;
-import ph.petrologisticscorp.finalsalary.model.Area;
-import ph.petrologisticscorp.finalsalary.model.Company;
-import ph.petrologisticscorp.finalsalary.model.Employee;
-import ph.petrologisticscorp.finalsalary.model.Salary;
+import ph.petrologisticscorp.finalsalary.model.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -72,6 +66,8 @@ public class EmployeeEditorController {
     private Button btnSalaryNew;
     @FXML
     private Button btnSave;
+    @FXML
+    private Button btnLeaveAction;
 
     @Inject
     private CompanyService mCompanyService;
@@ -81,6 +77,8 @@ public class EmployeeEditorController {
     private EmployeeService mEmployeeService;
     @Inject
     private SalaryService mSalaryService;
+    @Inject
+    private LeaveService mLeaveService;
 
     private ObservableList<Company> mCompanyObservableList;
     private ObservableList<Area> mAreaObservableList;
@@ -105,6 +103,7 @@ public class EmployeeEditorController {
             isEditMode = false;
             txtCode.setDisable(false);
             btnSalaryNew.setDisable(true);
+            btnLeaveAction.setDisable(true);
         }
         setupBindings();
         setupListeners();
@@ -194,7 +193,7 @@ public class EmployeeEditorController {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(20, 150, 10, 10));
+        gridPane.setPadding(new Insets(20, 15, 10, 15));
 
         TextField textFieldSalary = new TextField();
         textFieldSalary.setTextFormatter(Helper.generateDoubleTextFormatter());
@@ -240,6 +239,68 @@ public class EmployeeEditorController {
             Salary s = mSalaryService.saveOrUpdate(salary);
             mSalaryObservableList.add(s);
             System.out.println(s);
+        });
+    }
+
+    public void showLeaveDialog() {
+        Dialog<Leave> dialog = new Dialog<>();
+        dialog.setTitle("Leaves");
+        Leave leave = employeeSelected.getLeave();
+
+        if (employeeSelected.getLeave() == null) {
+            leave = new Leave();
+        }
+
+        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+        ((Stage) dialog.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/graph.png"));
+
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(20, 15, 10, 15));
+
+        TextField textFieldDays = new TextField();
+        textFieldDays.setTextFormatter(Helper.generateDoubleTextFormatter());
+
+        TextField textFieldRate = new TextField();
+        textFieldRate.setTextFormatter(Helper.generateDoubleTextFormatter());
+
+        ComboBox<Integer> comboBoxYear = new ComboBox<>(FXCollections.observableArrayList(Helper.generateYear()));
+
+        gridPane.add(new Label("Days"), 0, 0);
+        gridPane.add(textFieldDays, 1, 0);
+        gridPane.add(new Label("Rate"), 0, 1);
+        gridPane.add(textFieldRate, 1, 1);
+        gridPane.add(new Label("Year"), 0, 2);
+        gridPane.add(comboBoxYear, 1, 2);
+
+        dialog.getDialogPane().setContent(gridPane);
+
+        textFieldDays.setText(String.valueOf(leave.getDays()));
+        textFieldRate.setText(String.valueOf(leave.getRate()));
+        if (leave.getYear() == 0) comboBoxYear.getSelectionModel().selectFirst();
+        else comboBoxYear.getSelectionModel().select(new Integer(leave.getYear()));
+        Platform.runLater(textFieldDays::requestFocus);
+
+        Leave finalLeave = leave;
+        dialog.setResultConverter(dialogButtonType -> {
+            if (dialogButtonType == saveButtonType) {
+                finalLeave.setDays(Double.parseDouble(textFieldDays.getText()));
+                finalLeave.setRate(Double.parseDouble(textFieldRate.getText()));
+                finalLeave.setYear(comboBoxYear.getValue());
+                finalLeave.setEmployee(employeeSelected);
+                return finalLeave;
+            }
+            return null;
+        });
+
+        Optional<Leave> result = dialog.showAndWait();
+
+        result.ifPresent(leave1 -> {
+            Leave temp = mLeaveService.saveOrUpdate(leave1);
+            employeeSelected.setLeave(temp);
+            System.out.println(temp);
         });
     }
 }

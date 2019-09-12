@@ -21,7 +21,7 @@ public class Employee implements GUIRepresentable, Serializable {
     private final ObjectProperty<Area> area = new SimpleObjectProperty<>(this, "area");
     private final ObjectProperty<Date> hireDate = new SimpleObjectProperty<>(this, "hireDate");
     private final BooleanProperty active = new SimpleBooleanProperty(this, "isActive");
-    private final ObjectProperty<Set<Leave>> leaves = new SimpleObjectProperty<>(this, "leaves");
+    private final ObjectProperty<Leave> leave = new SimpleObjectProperty<>(this, "leave");
     private final ObjectProperty<Set<Salary>> salaries = new SimpleObjectProperty<>(this, "salaries");
 
     public Employee() {
@@ -152,17 +152,17 @@ public class Employee implements GUIRepresentable, Serializable {
         this.active.set(active);
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    public Set<Leave> getLeaves() {
-        return leaves.get();
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+    public Leave getLeave() {
+        return leave.get();
     }
 
-    public ObjectProperty<Set<Leave>> leavesProperty() {
-        return leaves;
+    public ObjectProperty<Leave> leaveProperty() {
+        return leave;
     }
 
-    public void setLeaves(Set<Leave> leaves) {
-        this.leaves.set(leaves);
+    public void setLeave(Leave leave) {
+        this.leave.set(leave);
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")

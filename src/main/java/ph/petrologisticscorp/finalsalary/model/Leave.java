@@ -31,8 +31,8 @@ public class Leave implements GUIRepresentable {
         this.id.set(id);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
     public Employee getEmployee() {
         return employee.get();
     }
