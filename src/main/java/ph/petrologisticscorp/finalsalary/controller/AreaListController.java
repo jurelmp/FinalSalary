@@ -2,6 +2,7 @@ package ph.petrologisticscorp.finalsalary.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -48,8 +49,8 @@ public class AreaListController {
                     if (oldWindow == null && newWindow != null) {
                         Stage s = ((Stage) newWindow);
                         s.setResizable(false);
-                        s.setHeight(370.0);
-                        s.setWidth(260.0);
+                        s.setHeight(400.0);
+                        s.setWidth(300.0);
                         s.setTitle("Areas");
                     }
                 });
@@ -85,5 +86,21 @@ public class AreaListController {
         mAreaObservableList.addAll(mAreaService.getAll());
         tableViewAreas.setItems(mAreaObservableList);
         TableFilter.forTableView(tableViewAreas).lazy(true).apply();
+    }
+
+    public void newEntryAction(ActionEvent actionEvent) {
+        TextInputDialog inputDialog = new TextInputDialog();
+        inputDialog.setTitle("New Entry");
+        inputDialog.setContentText("Name");
+        Stage s = (Stage) inputDialog.getDialogPane().getScene().getWindow();
+        s.getIcons().add(new Image("/images/graph.png"));
+
+        Optional<String> result = inputDialog.showAndWait();
+        if (result.isPresent() && !result.get().equals("")) {
+            Area area = new Area();
+            area.setName(result.get());
+            mAreaService.create(area);
+            mAreaObservableList.add(area);
+        }
     }
 }

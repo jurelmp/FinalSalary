@@ -118,7 +118,7 @@ public class CompanyListController {
         s.getIcons().add(new Image("/images/graph.png"));
 
         Optional<String> result = inputDialog.showAndWait();
-        if (result.isPresent()) {
+        if (result.isPresent() && !result.get().equals("")) {
             Company company = new Company();
             company.setName(result.get());
             mCompanyService.create(company);

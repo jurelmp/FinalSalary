@@ -6,19 +6,22 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="companyListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/8.0.211" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ph.petrologisticscorp.finalsalary.controller.CompanyListController">
+<BorderPane fx:id="companyListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="368.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/8.0.211"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ph.petrologisticscorp.finalsalary.controller.CompanyListController">
     <center>
         <TableView fx:id="tableViewCompanies" prefHeight="400.0" prefWidth="267.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="colName" prefWidth="260.0" text="Name" />
+                <TableColumn fx:id="colName" prefWidth="260.0" text="Name"/>
             </columns>
         </TableView>
     </center>
-   <top>
-      <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <items>
-          <Button mnemonicParsing="false" onAction="#newEntryAction" text="New Entry" />
-        </items>
-      </ToolBar>
-   </top>
+    <top>
+        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button mnemonicParsing="false" onAction="#newEntryAction" text="New Entry"/>
+            </items>
+        </ToolBar>
+    </top>
 </BorderPane>

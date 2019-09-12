@@ -1,18 +1,23 @@
 package ph.petrologisticscorp.finalsalary.controller;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.table.TableFilter;
 import ph.petrologisticscorp.finalsalary.Helper;
 import ph.petrologisticscorp.finalsalary.database.AreaService;
 import ph.petrologisticscorp.finalsalary.database.CompanyService;
 import ph.petrologisticscorp.finalsalary.database.EmployeeService;
+import ph.petrologisticscorp.finalsalary.database.SalaryService;
 import ph.petrologisticscorp.finalsalary.gui.modeladapter.ListViewModelAdapter;
 import ph.petrologisticscorp.finalsalary.model.Area;
 import ph.petrologisticscorp.finalsalary.model.Company;
@@ -22,6 +27,7 @@ import ph.petrologisticscorp.finalsalary.model.Salary;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Date;
+import java.util.Optional;
 
 @Singleton
 public class EmployeeEditorController {
@@ -73,6 +79,8 @@ public class EmployeeEditorController {
     private AreaService mAreaService;
     @Inject
     private EmployeeService mEmployeeService;
+    @Inject
+    private SalaryService mSalaryService;
 
     private ObservableList<Company> mCompanyObservableList;
     private ObservableList<Area> mAreaObservableList;
@@ -173,5 +181,65 @@ public class EmployeeEditorController {
             mEmployeeListController.addEmployeeToTable(mEmployeeService.saveOrUpdate(employeeSelected));
         }
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    }
+
+    public void showSalaryDialog() {
+        Dialog<Salary> dialog = new Dialog<>();
+        dialog.setTitle("Add Salary");
+
+        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+        ((Stage) dialog.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/graph.png"));
+
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField textFieldSalary = new TextField();
+        textFieldSalary.setTextFormatter(Helper.generateDoubleTextFormatter());
+        TextField textFieldSinking = new TextField();
+        textFieldSinking.setTextFormatter(Helper.generateDoubleTextFormatter());
+        TextField textFieldCanteen = new TextField();
+        textFieldCanteen.setTextFormatter(Helper.generateDoubleTextFormatter());
+        DatePicker datePickerFrom = new DatePicker(new java.sql.Date(new Date().getTime()).toLocalDate());
+        DatePicker datePickerTo = new DatePicker(new java.sql.Date(new Date().getTime()).toLocalDate());
+
+        gridPane.add(new Label("Salary"), 0, 0);
+        gridPane.add(textFieldSalary, 1, 0);
+        gridPane.add(new Label("Sinking Fund"), 0, 1);
+        gridPane.add(textFieldSinking, 1, 1);
+        gridPane.add(new Label("Canteen"), 0, 2);
+        gridPane.add(textFieldCanteen, 1, 2);
+        gridPane.add(new Label("From"), 0, 3);
+        gridPane.add(datePickerFrom, 1, 3);
+        gridPane.add(new Label("To"), 0, 4);
+        gridPane.add(datePickerTo, 1, 4);
+
+        dialog.getDialogPane().setContent(gridPane);
+
+        Platform.runLater(textFieldSalary::requestFocus);
+
+        dialog.setResultConverter(dialogButtonType -> {
+            if (dialogButtonType == saveButtonType) {
+                Salary salary = new Salary();
+                salary.setSalary(Double.parseDouble(textFieldSalary.getText()));
+                salary.setSinking(Double.parseDouble(textFieldSinking.getText()));
+                salary.setCanteen(Double.parseDouble(textFieldCanteen.getText()));
+                salary.setDurationFrom(Helper.toUtilDate(datePickerFrom.getValue()));
+                salary.setDurationTo(Helper.toUtilDate(datePickerTo.getValue()));
+                salary.setEmployee(employeeSelected);
+                return salary;
+            }
+            return null;
+        });
+
+        Optional<Salary> result = dialog.showAndWait();
+
+        result.ifPresent(salary -> {
+            Salary s = mSalaryService.saveOrUpdate(salary);
+            mSalaryObservableList.add(s);
+            System.out.println(s);
+        });
     }
 }

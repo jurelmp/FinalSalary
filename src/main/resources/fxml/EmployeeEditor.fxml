@@ -77,7 +77,7 @@
             <top>
                 <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <items>
-                        <Button fx:id="btnSalaryNew" mnemonicParsing="false" text="New" />
+                        <Button fx:id="btnSalaryNew" mnemonicParsing="false" onAction="#showSalaryDialog" text="New Salary" />
                     </items>
                 </ToolBar>
             </top>

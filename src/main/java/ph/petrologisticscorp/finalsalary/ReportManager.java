@@ -3,11 +3,13 @@ package ph.petrologisticscorp.finalsalary;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 
+import javax.inject.Singleton;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
+@Singleton
 public class ReportManager {
 
     public enum REPORTS {
