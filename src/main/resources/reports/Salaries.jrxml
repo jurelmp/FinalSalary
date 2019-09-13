@@ -15,7 +15,6 @@
     <parameter name="AREA_ID" class="java.lang.Integer"/>
     <parameter name="COMPANY" class="ph.petrologisticscorp.finalsalary.model.Company"/>
     <parameter name="COMPANY_ID" class="java.lang.Integer"/>
-    <parameter name="DATE_NOW" class="java.util.Date"/>
     <queryString>
         <![CDATA[SELECT E.ID, CODE, LAST_NAME, FIRST_NAME, MIDDLE_NAME, SALARY, SINKING, CANTEEN, ROUND((SALARY - (CANTEEN+SINKING)), 2) NET_PAY
 FROM EMPLOYEE E
@@ -351,11 +350,11 @@ FUND]]></text>
                 </reportElement>
                 <text><![CDATA[APPROVED FOR PAYMENT]]></text>
             </staticText>
-            <textField pattern="MMM d, yyyy" isBlankWhenNull="true">
+            <textField pattern="EEEE, MMM dd, yyyy" isBlankWhenNull="true">
                 <reportElement x="27" y="129" width="100" height="15" uuid="423d6773-b432-46b7-9b7d-8e62f530317f">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[$P{DATE_NOW}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="27" y="114" width="100" height="15" uuid="ca10a4f4-50e3-401e-9535-02bc7af9cb0a">

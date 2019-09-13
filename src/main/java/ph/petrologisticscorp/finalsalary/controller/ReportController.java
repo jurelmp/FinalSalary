@@ -148,11 +148,19 @@ public class ReportController {
         mReportManager.generateReport(ReportManager.REPORTS.SALARIES, getParameters());
     }
 
-    public void btnIndividualClickAction(ActionEvent event) {
-        // TODO: Report viewing for individual employee's salary.
+    public void btnIndividualClickAction(ActionEvent event) throws JRException, SQLException, ClassNotFoundException {
+        Map p = getParameters();
+        p.remove(Constants.PRESIDENT.getValue());
+        p.remove(Constants.DATE_NOW.getValue());
+        p.remove(Constants.AREA.getValue());
+        p.remove(Constants.YEAR.getValue());
+        mReportManager.generateReport(ReportManager.REPORTS.INDIVIDUAL, p);
     }
 
-    public void btnUnusedLeaveClickAction(ActionEvent event) {
-        // TODO: Report viewing for employees unused leaves.
+    public void btnUnusedLeaveClickAction(ActionEvent event) throws JRException, SQLException, ClassNotFoundException {
+        Map p = getParameters();
+        p.remove(Constants.DATE_FROM.getValue());
+        p.remove(Constants.DATE_TO.getValue());
+        mReportManager.generateReport(ReportManager.REPORTS.LEAVES, p);
     }
 }

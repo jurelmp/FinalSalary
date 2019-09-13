@@ -13,7 +13,9 @@ import java.util.Map;
 public class ReportManager {
 
     public enum REPORTS {
-        SALARIES("/reports/Salaries.jrxml");
+        SALARIES("/reports/Salaries.jrxml"),
+        LEAVES("/reports/Leaves.jrxml"),
+        INDIVIDUAL("/reports/Individual.jrxml");
 
         private String reportName;
 
