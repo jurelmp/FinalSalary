@@ -14,7 +14,7 @@ public class LeaveService {
         this.leaveDAO = leaveDAO;
     }
 
-    public Leave saveOrUpdate(Leave salary) {
-        return leaveDAO.saveOrUpdate(salary);
+    public Leave saveOrUpdate(Leave leave) {
+        return leaveDAO.saveOrUpdate(leave);
     }
 }

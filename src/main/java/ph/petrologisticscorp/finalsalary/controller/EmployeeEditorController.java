@@ -20,11 +20,14 @@ import ph.petrologisticscorp.finalsalary.model.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Optional;
 
 @Singleton
 public class EmployeeEditorController {
+
+    private static final String FX_ALIGNMENT_CENTER_RIGHT = "-fx-alignment: CENTER-RIGHT;";
 
     @FXML
     private SplitPane employeeEditorPane;
@@ -137,14 +140,27 @@ public class EmployeeEditorController {
                 .or(txtHireDateValid.not()));
 
         colSalary.setCellValueFactory(param -> param.getValue().salaryProperty().asObject());
+        colSalary.setStyle(FX_ALIGNMENT_CENTER_RIGHT);
+        colSalary.setCellFactory(param -> getTableCell());
+
         colSinking.setCellValueFactory(param -> param.getValue().sinkingProperty().asObject());
+        colSinking.setStyle(FX_ALIGNMENT_CENTER_RIGHT);
+        colSinking.setCellFactory(param -> getTableCell());
+
         colCanteen.setCellValueFactory(param -> param.getValue().canteenProperty().asObject());
+        colCanteen.setStyle(FX_ALIGNMENT_CENTER_RIGHT);
+        colCanteen.setCellFactory(param -> getTableCell());
+
         colFrom.setCellValueFactory(param -> param.getValue().durationFromProperty());
+        colFrom.setStyle(FX_ALIGNMENT_CENTER_RIGHT);
         colTo.setCellValueFactory(param -> param.getValue().durationToProperty());
+        colTo.setStyle(FX_ALIGNMENT_CENTER_RIGHT);
+        colTo.setSortType(TableColumn.SortType.DESCENDING);
 
         if (isEditMode) {
             mSalaryObservableList.addAll(employeeSelected.getSalaries());
             tableViewEmployeeSalaries.setItems(mSalaryObservableList);
+            tableViewEmployeeSalaries.getSortOrder().add(colTo);
         }
 
         mCompanyObservableList.addAll(mCompanyService.getAll());
@@ -156,6 +172,15 @@ public class EmployeeEditorController {
         txtLastName.setText(employeeSelected.getLastName());
         txtFirstName.setText(employeeSelected.getFirstName());
         txtMidInitial.setText(employeeSelected.getMiddleName());
+        txtMidInitial.setTextFormatter(new TextFormatter<String>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.length() > 1) {
+                return null;
+            } else {
+                return change;
+            }
+        }));
+
         cmbCompany.setValue(employeeSelected.getCompany());
         cmbArea.setValue(employeeSelected.getArea());
         txtHireDate.setValue(employeeSelected.getHireDate() != null ?
@@ -163,6 +188,20 @@ public class EmployeeEditorController {
         txtStatus.setText(employeeSelected.isActive() ? "Active" : "Inactive");
 
         TableFilter.forTableView(tableViewEmployeeSalaries).lazy(true).apply();
+    }
+
+    private TableCell<Salary, Double> getTableCell() {
+        return new TableCell<Salary, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(new DecimalFormat("#,##0.00#;(#,##0.00#)").format(item.doubleValue()));
+                }
+            }
+        };
     }
 
     public void save(ActionEvent event) {

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -72,9 +73,12 @@ public class EmployeeListController {
         colCompany.setCellValueFactory(param -> param.getValue().companyProperty().getValue().nameProperty());
         colArea.setCellValueFactory(param -> param.getValue().areaProperty().getValue().nameProperty());
         colHireDate.setCellValueFactory(param -> param.getValue().hireDateProperty());
+        colHireDate.setSortType(TableColumn.SortType.DESCENDING);
         colStatus.setCellValueFactory(param -> param.getValue().activeProperty());
+        colStatus.setCellFactory(CheckBoxTableCell.forTableColumn(colStatus));
         mEmployeeObservableList.addAll(employeeService.getAll());
         tableViewEmployees.setItems(mEmployeeObservableList);
+        tableViewEmployees.getSortOrder().add(colHireDate);
         TableFilter.forTableView(tableViewEmployees).lazy(true).apply();
     }
 

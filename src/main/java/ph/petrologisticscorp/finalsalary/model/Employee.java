@@ -152,7 +152,7 @@ public class Employee implements GUIRepresentable, Serializable {
         this.active.set(active);
     }
 
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public Leave getLeave() {
         return leave.get();
     }
